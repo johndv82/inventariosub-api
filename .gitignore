@@ -1,0 +1,54 @@
+# ============================
+# FastAPI / Python
+# ============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.log
+
+# Ignorar entornos virtuales
+.venv/
+.env/
+venv/
+env/
+.mivenv/
+
+# Configuración de entorno
+*.env
+
+# Compilación / Distribución
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Cache de pytest y coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+.dmypy/
+.pyre/
+.pytype/
+
+#pipenv
+Pipfile
+Pipfile.lock
