@@ -1,27 +1,23 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from fastapi import APIRouter, Depends, HTTPException, status
 from core.database import get_db
-from models.sede import Sede
 from schemas.sede import SedeCreate, SedeResponse
+from services import sede as SedeService
+from sqlalchemy.orm import Session
+from services.exception import ServiceException
 
 router = APIRouter(prefix="/sedes", tags=["Sedes"])
 
-@router.post("/", response_model=SedeResponse)
-def crear_sede(sede: SedeCreate, db: Session = Depends(get_db)):
-    nueva_sede = Sede(**sede.model_dump())
-    db.add(nueva_sede)
+@router.post("/", response_model=SedeResponse, status_code=201)
+def crear(sede: SedeCreate, db: Session = Depends(get_db)):
     try:
-        db.commit()
-        db.refresh(nueva_sede)
-    except IntegrityError:
-        db.rollback()
+        return SedeService.crear_sede(db, sede)
+    except ServiceException as e:
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Ya existe una sede con ese nombre"
+            status_code=e.code,
+            detail=str(e.message)
         )
-    return nueva_sede
 
 @router.get("/", response_model=list[SedeResponse])
-def listar_sedes(db: Session = Depends(get_db)):
-    return db.query(Sede).all()
+def listar(db: Session = Depends(get_db)):
+    return SedeService.listar_sede(db)
