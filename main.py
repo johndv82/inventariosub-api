@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api import sede as sedeApi
+from api import sedes, usuarios
 from core.database import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
 from models import *
@@ -20,4 +20,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(sedeApi.router)
+app.include_router(sedes.router)
+app.include_router(usuarios.router)

@@ -1,4 +1,3 @@
-from sqlalchemy.exc import IntegrityError
 from fastapi import APIRouter, Depends, HTTPException, status
 from core.database import get_db
 from schemas.sede import SedeCreate, SedeResponse

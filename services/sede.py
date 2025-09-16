@@ -1,7 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-from fastapi import Depends
 from sqlalchemy.orm import Session
-from core.database import get_db
 from models.sede import Sede
 from schemas.sede import SedeCreate
 from services.exception import ServiceException
@@ -18,6 +16,7 @@ def crear_sede(db:Session, data: SedeCreate):
         raise ServiceException("El nombre ya está en uso", code=409) # HTTP_409_CONFLICT
     return nueva_sede
 
+@staticmethod
 def listar_sede(db:Session):
     sedes = db.query(Sede).all()
     return sedes
