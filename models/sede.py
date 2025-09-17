@@ -5,5 +5,5 @@ class Sede(Base):
     __tablename__ = "sedes"
 
     id = Column(Integer, primary_key=True, index=True)
-    nombre = Column(String, unique=True, nullable=False)
-    direccion = Column(String, nullable=False)
+    nombre = Column(String(250), unique=True, nullable=False)
+    direccion = Column(String(250), nullable=False)

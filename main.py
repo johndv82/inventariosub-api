@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api import sedes, usuarios, proveedores
+from api import sedes, usuarios, proveedores, productos
 from core.database import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
 from models import *
@@ -23,3 +23,4 @@ app.add_middleware(
 app.include_router(sedes.router)
 app.include_router(usuarios.router)
 app.include_router(proveedores.router)
+app.include_router(productos.router)
