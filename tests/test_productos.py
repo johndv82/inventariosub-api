@@ -24,7 +24,7 @@ def test_crear_producto_proveedor_inexistente():
         "peso_en_kilos": 5,
         "estado": "ACTIVO",
         "usuario_creacion": "tester",
-        "proveedor_ruc": "99999999999"
+        "proveedor_ruc": "00000000000"
     }
     response = client.post("/productos/", json=data)
     assert response.status_code == 404
@@ -44,8 +44,7 @@ def test_obtener_producto(proveedor_creado):
     response = client.post("/productos/", json=data)
     assert response.status_code in (200, 201)
 
-    producto = response.json()
-    producto_id = producto["id"] 
+    producto_id = response.json().get("id")
 
     # 2. Obtener producto
     response = client.get(f"/productos/{producto_id}")
@@ -68,7 +67,7 @@ def test_actualizar_producto(proveedor_creado):
     }
     response = client.post("/productos/", json=data)
     assert response.status_code in (200, 201)
-    producto_id = response.json()["id"]
+    producto_id = response.json().get("id") 
 
     # 2. Actualizar producto
     payload = {"descripcion": "Harina refinada 1kg", "unidad_medida": "KL"}

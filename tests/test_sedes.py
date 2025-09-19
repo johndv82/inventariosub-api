@@ -13,6 +13,9 @@ def test_crear_sede():
 def test_crear_sede_duplicada():
     payload = {"nombre": "Sede Central", "direccion": "Av. Principal 123"}
     response = client.post("/sedes/", json=payload)
+    assert response.status_code == 201
+    #Crer de nuevo la misma Sede
+    response = client.post("/sedes/", json=payload)
     assert response.status_code == 409
 
 

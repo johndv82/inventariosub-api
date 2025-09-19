@@ -5,7 +5,7 @@ client= TestClient(app)
 
 def test_crear_usuario(sede_creada):
     data = {
-        "nombre": "Usuario Test 222 456",
+        "nombre": "Usuario Test 123",
         "email": "usuario@test.com",
         "is_admin": False,
         "sede_id": sede_creada
@@ -17,14 +17,14 @@ def test_crear_usuario(sede_creada):
 def test_obtener_usuario(sede_creada):
     # 1. Crear usuario
     data = {
-        "nombre": "Usuario Test Obtener 222 35 1222",
+        "nombre": "Usuario Test Obtener 1",
         "email": "usuario.obtener@test.com",
         "is_admin": False,
         "sede_id": sede_creada
     }
     response = client.post("/usuarios/", json=data)
     assert response.status_code in (200, 201)
-    usuario_id = response.json()["id"]
+    usuario_id = response.json().get("id") 
 
     # 2. Obtener usuario
     response = client.get(f"/usuarios/{usuario_id}")
@@ -35,7 +35,7 @@ def test_obtener_usuario(sede_creada):
     assert body["email"] == data["email"]
 
 def test_obtener_usuario_inexistente():
-    response = client.get("/usuarios/9999")
+    response = client.get("/usuarios/0")
     assert response.status_code == 404
 
 
@@ -49,7 +49,7 @@ def test_actualizar_usuario(sede_creada):
     }
     response = client.post("/usuarios/", json=data)
     assert response.status_code in (200, 201)
-    usuario_id = response.json()["id"]
+    usuario_id = response.json().get("id") 
 
     payload = {
         "nombre": "Juan Lopez Actualizado",
@@ -75,7 +75,7 @@ def test_eliminar_usuario(sede_creada):
     }
     response = client.post("/usuarios/", json=data)
     assert response.status_code in (200, 201)
-    usuario_id = response.json()["id"]
+    usuario_id = response.json().get("id") 
 
     # 2. Eliminar usuario
     response = client.delete(f"/usuarios/{usuario_id}")
