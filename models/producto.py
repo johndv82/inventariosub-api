@@ -28,3 +28,4 @@ class Producto(Base):
     usuario_creacion = Column(String(25), nullable=False)
 
     proveedor = relationship("Proveedor", back_populates="productos")
+    movimientos = relationship("Inventario", back_populates="producto")

@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from core.database import Base
+from sqlalchemy.orm import relationship
 
 class Sede(Base):
     __tablename__ = "sedes"
@@ -7,3 +8,5 @@ class Sede(Base):
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String(250), unique=True, nullable=False)
     direccion = Column(String(250), nullable=False)
+
+    movimientos = relationship("Inventario", back_populates="sede")
