@@ -23,7 +23,7 @@ class ProductoService:
             db.refresh(producto)
         except IntegrityError:
             db.rollback()
-            raise ServiceException("El código de producto ya existe", 409)
+            raise ServiceException("Error de integridad con Producto", 409)
         return producto
 
     @staticmethod
@@ -51,5 +51,5 @@ class ProductoService:
             db.refresh(producto)
         except IntegrityError:
             db.rollback()
-            raise ServiceException("Conflicto al actualizar producto", 409)
+            raise ServiceException("Error de integridad con Producto", 409)
         return producto

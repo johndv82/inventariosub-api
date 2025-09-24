@@ -27,7 +27,7 @@ def obtener_usuario(usuario_id: int, db: Session = Depends(get_db)):
             detail=str(e.message)
         )
 
-@router.put("/{usuario_id}", response_model=UsuarioResponse)
+@router.put("/{usuario_id}", response_model=UsuarioResponse, status_code=200)
 def actualizar_usuario(usuario_id: int, usuario: UsuarioUpdate, db: Session = Depends(get_db)):
     try:
         return UsuarioService.actualizar_usuario(db, usuario_id, usuario)

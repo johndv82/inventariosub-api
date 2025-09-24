@@ -15,18 +15,18 @@ def crear(data: ProveedorCreate, db: Session = Depends(get_db)):
     except ServiceException as e:
         raise HTTPException(status_code=e.code, detail=e.message)
 
-@router.get("/{ruc}", response_model=ProveedorResponse)
+@router.get("/{ruc}", response_model=ProveedorResponse, status_code=200)
 def obtener(ruc: str, db: Session = Depends(get_db)):
     try:
         return ProveedorService.obtener(db, ruc)
     except ServiceException as e:
         raise HTTPException(status_code=e.code, detail=e.message)
 
-@router.get("/", response_model=list[ProveedorResponse])
+@router.get("/", response_model=list[ProveedorResponse], status_code=200)
 def listar(db: Session = Depends(get_db)):
     return ProveedorService.listar(db)
 
-@router.put("/{ruc}", response_model=ProveedorResponse)
+@router.put("/{ruc}", response_model=ProveedorResponse, status_code=200)
 def actualizar(ruc: str, data: ProveedorUpdate, db: Session = Depends(get_db)):
     try:
         return ProveedorService.actualizar(db, ruc, data)

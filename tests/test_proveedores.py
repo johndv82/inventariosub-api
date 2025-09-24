@@ -41,17 +41,18 @@ def test_obtener_proveedor(proveedor_creado):
 
 
 def test_actualizar_proveedor(proveedor_creado):
-    payload = {
+    dataUpd = {
         "razon_social": "Proveedor A Modificado",
-        "contacto": "Carlos L."
+        "contacto": "Carlos L.",
+        "telefono_contacto": "01010101",
+        "estado": "ACTIVO"
     }
 
-    response = client.put(f"/proveedores/{proveedor_creado}", json=payload)
+    response = client.put(f"/proveedores/{proveedor_creado}", json=dataUpd)
     assert response.status_code == 200
-
     body = response.json()
-    assert body["razon_social"] == payload["razon_social"]
-    assert body["contacto"] == payload["contacto"]
+    assert body["razon_social"] == dataUpd["razon_social"]
+    assert body["contacto"] == dataUpd["contacto"]
 
 
 def test_listar_proveedores():

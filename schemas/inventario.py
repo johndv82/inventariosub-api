@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 from datetime import datetime
 from models.inventario import EstadoProducto, TipoMovimiento, EstadoRegistro
@@ -25,5 +25,4 @@ class InventarioResponse(InventarioBase):
     fecha_anulacion: Optional[datetime] = None
     usuario_anulacion: Optional[str] = None
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

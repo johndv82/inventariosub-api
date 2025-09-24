@@ -14,8 +14,8 @@ def test_crear_producto(proveedor_creado):
         "proveedor_ruc": proveedor_creado
     }
     response = client.post("/productos/", json=data)
-    assert response.status_code in (200, 201, 409)
-
+    assert response.status_code == 201
+    
 def test_crear_producto_proveedor_inexistente():
     data = {
         "codigo": "PRD-4044534",
@@ -42,7 +42,7 @@ def test_obtener_producto(proveedor_creado):
         "proveedor_ruc": proveedor_creado
     }
     response = client.post("/productos/", json=data)
-    assert response.status_code in (200, 201)
+    assert response.status_code == 201
 
     producto_id = response.json().get("id")
 
@@ -66,7 +66,7 @@ def test_actualizar_producto(proveedor_creado):
         "proveedor_ruc": proveedor_creado
     }
     response = client.post("/productos/", json=data)
-    assert response.status_code in (200, 201)
+    assert response.status_code == 201
     producto_id = response.json().get("id") 
 
     # 2. Actualizar producto
